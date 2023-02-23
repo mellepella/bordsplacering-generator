@@ -51,14 +51,22 @@ function createA4(tiles, name) {
   download(name, canvas.toDataURL());
 }
 
+function drawProvidedImage(image) {
+  const canvas = document.getElementById("canvas");
+  canvas.height = image.height;
+  canvas.width = image.width;
+  const ctx = canvas.getContext("2d");
+  ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+}
+
 function createAllTiles() {
   const { width, height } = createTile(this, "test");
+  drawProvidedImage(this);
   const tilesPerWidth = Math.floor(A4_DIMENSIONS.width / width);
   const tilesPerHeight = Math.floor(A4_DIMENSIONS.height / height);
   const numberOfA4Needed = Math.ceil(
     input.length / (tilesPerHeight * tilesPerWidth)
   );
-  console.log(numberOfA4Needed);
   let inputIndex = -1;
 
   const tiles = repeat(
